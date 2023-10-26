@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row justify-content-center">
+
+<div class="col-xl-8 col-lg-10">
+    <div class="card">
+     <div class="card-header">
+      <h4 class="card-title">
+       Select payments 
+      </h4>
+     </div>
+     <div class="card-body">
+      <div class="basic-form">
+       <form action="{% url 'make-payments' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+         <label class="form-label">
+          Select list (select one):
+         </label>
+         <select class="default-select form-control wide" name="fees">
+            {% for fee in fees %}
+
+            <option value={{fee.id}}>{{fee.title}}</option>
+
+            {% endfor %}
+         </select>
+         
+        </div>
+        <button class="btn btn-block btn-primary" type="submit">
+            Create Payment Ticket
+           </button>
+
+        
+       </form>
+      </div>
+     </div>
+    </div>
+   </div>
+</div>
+{% endblock %}

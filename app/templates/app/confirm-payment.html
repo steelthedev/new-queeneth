@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid">
+    <!-- row -->
+    <div class="row">
+
+        <div class="col-xl-9 col-lg-8">
+            <div class="card profile-card card-bx">
+             <div class="card-header">
+              <h6 class="title">
+               Confirm Ticket Payment
+               <br>
+               {{ticket.transaction_id}}
+              </h6>
+             </div>
+             <form class="profile-form">
+              <div class="card-body">
+               <div class="row">
+                <div class="col-sm-6 m-b30">
+                 <h3 class="form-label">
+                  Full Name
+                 </h3>
+                 <h6>
+                    {{student.get_full_name}}
+                 </h6>
+                
+                </div>
+                <div class="col-sm-6 m-b30">
+                 <h3 class="form-label">
+                    Matriculation Number
+                 </h3>
+                 <h6>{{student.mat_no}}</h6>
+                </div>
+                <div class="col-sm-6 m-b30">
+                 <h3 class="form-label">
+                  Payment For
+                 </h3>
+                 <h6>
+                    {{ticket.fee.title}}
+                 </h6>
+                
+                </div>
+                <div class="col-sm-6 m-b30">
+                 <h3 class="form-label">
+                  Status
+                 </h3>
+                    <h6>{{ticket.status}}</h6> 
+                </div>
+                <div class="col-sm-6 m-b30">
+                 <h3 class="form-label d-block">
+                  Email address
+                 </h3>
+                <h6>{{request.user.email}}</h6>
+                </div>
+           
+                <div class="col-sm-6 m-b30">
+                 <h3 class="form-label">
+                  Phone
+                 </h3>
+                 <h6>
+                    {{student.phone}}
+                 </h6>
+                </div>
+                <div class="col-sm-6 m-b30">
+                    <h3 class="form-label">
+                     Amount
+                    </h3>
+                    <h6>
+                      NGN {{ticket.amount}}
+                    </h6>
+                   
+                   </div>
+            
+               </div>
+              </div>
+              <div class="card-footer">
+                <form>
+                <script src="https://js.paystack.co/v1/inline.js"></script>
+                <a class="btn btn-primary" role="button" onclick="payWithPaystack()">
+                PROCEED TO PAYSTACK
+               </a>
+               </form>
+               <script>
+                function payWithPaystack(){
+                  var handler = PaystackPop.setup({
+                    key: "pk_test_163b184c8b941a87ba1cacc90d3c2607fb86357d",
+                    email: '{{request.user.email}}',
+                    amount: {{ticket.amount}} * 100,
+                    currency: "NGN",
+                    ref: '{{ticket.transaction_id}}',
+                    firstname: '{{request.user.first_name}}}',
+                    lastname: '{{request.user.last_name}}',
+                    // label: "Optional string that replaces customer email"
+                    metadata: {
+                       custom_fields: [
+                          {
+                              display_name: "Mobile Number",
+                              variable_name: "mobile_number",
+                              value: "+2348012345678"
+                          }
+                       ]
+                    },
+                    callback: function(response){
+                        window.location.href= "{% url 'verify-payment' ticket.transaction_id %}"
+                    },
+
+
+
+                    onClose: function(){
+                        alert('window closed');
+                    }
+                  });
+                  handler.openIframe();
+                }
+              </script>
+
+
+              
+              </div>
+             </form>
+            </div>
+           </div>
+    </div>
+</div>
+
+
+{% endblock %}
