@@ -38,6 +38,7 @@ def get_student(request,id):
 def delete_student(request,id):
     student = Student.objects.get(id=id)
     student.delete()
+    messages.success(request, "Operation successful")
     return redirect("staff:all-students")
     
 
@@ -55,14 +56,6 @@ def get_all_payments(request):
     }
     return render(request,"staff/transactions-list.html", context)
 
-@staff_required
-def get_student_payments(request,id):
-    student = Profile.objects.get(id=id)
-    transactions = Transaction.objects.filter(user = student )
-    context = {
-        "transactions":transactions
-    }
-    return render(request,"dashboard/transaction-history.html", context)
 
 
 @staff_required
@@ -132,6 +125,7 @@ def add_payment_type(request):
         price = request.POST.get("price")
 
         SchoolFee.objects.create(title=title, price=price)
+        messages.success(request, "Operation successful")
         return redirect("staff:add-details")
 
 def add_new_faculty(request):
@@ -139,6 +133,7 @@ def add_new_faculty(request):
         title = request.POST.get("title")
 
         Faculty.objects.create(title=title)
+        messages.success(request, "Operation successful")
         return redirect("staff:add-details")
 
 def add_new_deparment(request):
@@ -147,6 +142,7 @@ def add_new_deparment(request):
         title = request.POST.get("title")
 
         Department.objects.create(title=title)
+        messages.success(request, "Operation successful")
         return redirect("staff:add-details")
     
 
@@ -161,6 +157,7 @@ def edit_student_password(request,id):
 
         student.user.password = make_password(new_password)
         student.user.save()
+        messages.success(request, "Operation successful")
         return redirect("staff:edit-student",student.id)
     
 @staff_required
@@ -181,6 +178,7 @@ def edit_basic(request,id):
         student.user.save()
         student.save()
 
+        messages.success(request, "Operation successful")
         return redirect("staff:edit-student", student.id)        
 
 

@@ -61,6 +61,8 @@ class Student(models.Model):
             faculty_code = str(self.faculty.title).upper()[:3] 
             rand_no = get_random_string(7,"123456789")
             self.mat_no = "{}{}".format(faculty_code,rand_no)
+        if not self.image:
+            self.image = '../static/images/no-img-avatar.png'
         super(Student, self).save(*args, **kwargs)
 
 

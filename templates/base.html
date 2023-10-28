@@ -206,6 +206,25 @@
         ***********************************-->
 
    <div class="content-body">
+   
+        {% if messages %}
+        <div class="messages mt-4">
+          {% for message in messages %}
+          <div class="alert alert-{{message.tags}}"> 
+            
+            {{message}}
+  
+            <script>
+              setTimeout(function() {
+                $('.alert-{{ message.tags }}').fadeOut('slow');
+              }, 2000);
+            </script>
+            
+          </div>
+  
+  
+          {% endfor %}
+        {% endif %}
     {% block content %}
 
     {% endblock %}

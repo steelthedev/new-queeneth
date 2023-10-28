@@ -184,33 +184,31 @@
    </div>
 
    <script>
-    $(function () {
-               $("#datepicker").datepicker({ 
-                     autoclose: true, 
-                     todayHighlight: true
-               }).datepicker('update', new Date());
-         
-         });
-   </script>
-   <script>
     function readURL(input) {
-     if (input.files && input.files[0]) {
-         var reader = new FileReader();
-         reader.onload = function(e) {
-             $('#imagePreview').css('background-image', 'url('+e.target.result +')');
-             $('#imagePreview').hide();
-             $('#imagePreview').fadeIn(650);
-         }
-         reader.readAsDataURL(input.files[0]);
-     }
- }
- $("#imageUpload").change(function() {
-     readURL(this);
- });
-     $('.remove-img').on('click', function() {
-         var imageUrl = "{% static 'images/no-img-avatar.png' %}";
-         $('.avatar-preview, #imagePreview').removeAttr('style');
-         $('#imagePreview').css('background-image', 'url(' + imageUrl + ')');
-     });
-   </script>
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var imagePreview = document.getElementById('imagePreview');
+                imagePreview.style.backgroundImage = 'url(' + e.target.result + ')';
+                imagePreview.style.display = 'none';
+                imagePreview.style.display = 'block';
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    document.getElementById('imageUpload').addEventListener('change', function() {
+        readURL(this);
+    });
+
+    var removeImg = document.querySelector('.remove-img');
+    removeImg.addEventListener('click', function() {
+        var imageUrl = "{% static 'images/no-img-avatar.png' %}";
+        var avatarPreview = document.querySelector('.avatar-preview');
+        var imagePreview = document.getElementById('imagePreview');
+        avatarPreview.style.removeProperty('style');
+        imagePreview.style.backgroundImage = 'url(' + imageUrl + ')';
+    });
+</script>
+
 {% endblock %}

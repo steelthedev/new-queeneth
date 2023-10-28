@@ -18,3 +18,8 @@ class Staff(models.Model):
     def __str__(self):
         return self.user.email
     
+    def save(self, *args, **kwargs):
+        
+        if not self.image:
+            self.image = '../static/images/no-img-avatar.png'
+        super(Staff, self).save(*args, **kwargs)
