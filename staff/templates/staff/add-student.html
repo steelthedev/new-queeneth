@@ -4,6 +4,8 @@
 {% block content %}
 
 <div class="container-fluid">
+    <form action="{% url 'staff:add-student' %}" method="post">
+        {% csrf_token %}
     <div class="row">
      <div class="col-xl-12">
       <div class="card">
@@ -27,7 +29,7 @@
             </div>
            </div>
            <div class="change-btn mt-2 mb-lg-0 mb-3">
-            <input accept=".png, .jpg, .jpeg" class="form-control d-none" id="imageUpload" type="file"/>
+            <input accept=".png, .jpg, .jpeg" name="picture" class="form-control d-none" id="imageUpload" type="file"/>
             <label class="dlab-upload mb-0 btn btn-primary btn-sm" for="imageUpload">
              Choose File
             </label>
@@ -47,20 +49,16 @@
                *
               </span>
              </label>
-             <input class="form-control" id="exampleFormControlInput1" placeholder="James" type="text"/>
+             <input class="form-control" id="exampleFormControlInput1" placeholder="James" name="first_name" type="text"/>
             </div>
-            <div class="mb-3">
-             <label class="form-label text-primary">
-              Date &amp; Place of Birth
-              <span class="required">
-               *
-              </span>
-             </label>
-             <div class="d-flex">
-              <input class="form-control" id="datepicker" placeholder="2017-06-04" type="text"/>
-              <input class="form-control w-50 ms-3" id="exampleFormControlInput7" placeholder="USA" type="text"/>
-             </div>
-            </div>
+            <label class="form-label text-primary" for="exampleFormControlInput1">
+                Last Name
+                <span class="required">
+                 *
+                </span>
+               </label>
+               <input class="form-control" id="exampleFormControlInput1" placeholder="James" name="last_name" type="text"/>
+              </div>
             <div class="mb-3">
              <label class="form-label text-primary" for="exampleFormControlInput3">
               Email
@@ -68,8 +66,17 @@
                *
               </span>
              </label>
-             <input class="form-control" id="exampleFormControlInput3" placeholder="hello@example.com" type="email"/>
+             <input class="form-control" id="exampleFormControlInput3" placeholder="hello@example.com" name="email" type="email"/>
             </div>
+            <div class="mb-3">
+                <label class="form-label text-primary" for="exampleFormControlInput3">
+                 Phone number
+                 <span class="required">
+                  *
+                 </span>
+                </label>
+                <input class="form-control" id="exampleFormControlInput3" placeholder="0706473782892" name="phone" type="tel"/>
+               </div>
             <div class="mb-3">
              <label class="form-label text-primary" for="exampleFormControlTextarea1">
               Address
@@ -77,39 +84,62 @@
                *
               </span>
              </label>
-             <textarea class="form-control" id="exampleFormControlTextarea1" rows="6">
+             <textarea class="form-control" id="exampleFormControlTextarea1" name="address" rows="6">
                                                     
                                                  </textarea>
             </div>
+            
            </div>
-           <div class="col-xl-6 col-sm-6">
-            <div class="mb-3">
-             <label class="form-label text-primary" for="exampleFormControlInput4">
-              Last Name
-              <span class="required">
-               *
-              </span>
-             </label>
-             <input class="form-control" id="exampleFormControlInput4" placeholder="Wally" type="text"/>
-            </div>
-            <div class="mb-3">
-             <label class="form-label text-primary" for="exampleFormControlInput5">
-              Parent Name
-              <span class="required">
-               *
-              </span>
-             </label>
-             <input class="form-control" id="exampleFormControlInput5" placeholder="Mana William" type="text"/>
-            </div>
-            <div class="mb-3">
-             <label class="form-label text-primary" for="exampleFormControlInput6">
-              Phone Number
-              <span class="required">
-               *
-              </span>
-             </label>
-             <input class="form-control" id="exampleFormControlInput6" placeholder="+123456789" type="number"/>
-            </div>
+           <div class="col-sm-6 m-b30">
+            <label class="form-label text-primary">
+             Gender
+            </label>
+            <select class="selectpicker w-100" name="gender">
+         
+ 
+             
+             <option selected value="0">Male</option>
+             <option selected value="1">Female</option>
+             
+   
+            </select>
+           </div>
+           <div class="col-sm-6 m-b30">
+            <label class="form-label text-primary">
+             Department
+            </label>
+            <select class="selectpicker w-100" name="department">
+        
+ 
+             {% for department in departments %}
+             <option value={{department.id}} >{{department.title}}</option>
+             {% endfor %}
+   
+            </select>
+           </div>
+        
+          <div class="col-sm-6 m-b30">
+           <label class="form-label text-primary">
+            Faculty
+           </label>
+           <select class="selectpicker w-100" name="faculty">
+          
+
+            {% for faculty in faculties %}
+            <option  value={{faculty.id}} >{{faculty.title}}</option>
+            {% endfor %}
+  
+           </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-primary" for="exampleFormControlInput3">
+             Year
+             <span class="required">
+              *
+             </span>
+            </label>
+            <input class="form-control" id="exampleFormControlInput3" name="year" placeholder="400,300,200" type="text"/>
            </div>
           </div>
          </div>
@@ -117,99 +147,40 @@
        </div>
       </div>
      </div>
-    </div>
+  
     <div class="col-xl-12">
      <div class="card">
-      <div class="card-header">
-       <h5 class="mb-0">
-        Parents Details
-       </h5>
-      </div>
-      <div class="card-body">
-       <div class="row">
-        <div class="col-xl-6 col-sm-6">
-         <div class="mb-3">
-          <label class="form-label text-primary" for="exampleFormControlInput8">
-           First Name
-           <span class="required">
-            *
-           </span>
-          </label>
-          <input class="form-control" id="exampleFormControlInput8" placeholder="Mana" type="text"/>
-         </div>
-         <div class="mb-3">
-          <label class="form-label text-primary" for="exampleFormControlInput9">
-           Email
-           <span class="required">
-            *
-           </span>
-          </label>
-          <input class="form-control" id="exampleFormControlInput9" placeholder="hello@example.com" type="email"/>
-         </div>
-         <div class="mb-3">
-          <label class="form-label text-primary" for="exampleFormControlTextarea2">
-           Address
-           <span class="required">
-            *
-           </span>
-          </label>
-          <textarea class="form-control" id="exampleFormControlTextarea2" rows="6">
-                                        
-                                     </textarea>
-         </div>
-        </div>
-        <div class="col-xl-6 col-sm-6">
-         <div class="mb-3">
-          <label class="form-label text-primary" for="exampleFormControlInput10">
-           Last Name
-           <span class="required">
-            *
-           </span>
-          </label>
-          <input class="form-control" id="exampleFormControlInput10" placeholder="Wick" type="text"/>
-         </div>
-         <div class="mb-3">
-          <label class="form-label text-primary" for="exampleFormControlInput11">
-           Phone Number
-           <span class="required">
-            *
-           </span>
-          </label>
-          <input class="form-control" id="exampleFormControlInput11" placeholder="+123456789" type="number"/>
-         </div>
-         <label class="form-label text-primary">
-          Payments
-          <span class="required">
-           *
-          </span>
-         </label>
-         <div class="d-flex align-items-center">
-          <div class="form-check">
-           <input class="form-check-input" id="flexCheckDefault" type="checkbox" value=""/>
-           <label class="form-check-label font-w500" for="flexCheckDefault">
-            Cash
-           </label>
-          </div>
-          <div class="form-check ms-3">
-           <input class="form-check-input" id="flexCheckDefault1" type="checkbox" value=""/>
-           <label class="form-check-label font-w500" for="flexCheckDefault1">
-            Debits
-           </label>
-          </div>
-         </div>
-        </div>
-       </div>
-       <div class="">
-        <button class="btn btn-outline-primary me-3">
-         Save as Draft
-        </button>
-        <button class="btn btn-primary" type="button">
-         Save
-        </button>
-       </div>
-      </div>
+        <div class="card-header">
+            <h6 class="title">
+             Password and Auth
+            </h6>
+           </div>
+      
+            <div class="card-body">
+             <div class="row">
+              <div class="col-sm-6 m-b30">
+               <label class="form-label">
+                Set Password
+               </label>
+               <input class="form-control" type="text" name="password" />
+
+              </div>
+          
+              
+             </div>
+             <button class="btn btn-primary mt-3" type="submit">
+               Save
+               </button>
+
+            </div>
+          
+        
+           
+        
      </div>
+     
     </div>
+    </form>
    </div>
 
    <script>

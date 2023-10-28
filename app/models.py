@@ -5,6 +5,7 @@ from .paystack import PayStack
 # Create your models here.
 import time
 import random
+from django.utils.crypto import get_random_string
 
 MALE = "male"
 FEMALE = "female"
@@ -54,6 +55,13 @@ class Student(models.Model):
     
     def get_full_name(self) -> str:
         return f"{self.user.first_name} {self.user.last_name}"
+    
+    def save(self, *args, **kwargs):
+        if not self.mat_no:
+            faculty_code = str(self.faculty.title).upper()[:3] 
+            rand_no = get_random_string(7,"123456789")
+            self.mat_no = "{}{}".format(faculty_code,rand_no)
+        super(Student, self).save(*args, **kwargs)
 
 
 

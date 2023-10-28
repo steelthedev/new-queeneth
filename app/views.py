@@ -37,9 +37,12 @@ def LogoutView(request):
 
 @login_required(login_url='login')
 def DashboardView(request):
-    student = request.user.student_user
-    tickets = Ticket.objects.filter(student=student).order_by("-created_on")
-
+    try:
+        student = request.user.student_user
+        tickets = Ticket.objects.filter(student=student).order_by("-created_on")
+    except:
+        student = None
+        tickets = None
     context = {
         'student':student,
         'tickets': tickets

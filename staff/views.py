@@ -10,8 +10,9 @@ from .decorators import staff_required
 from app.models import Ticket,Student,SchoolFee
 from school.models import Department, Faculty
 from django.contrib.auth.hashers import make_password
-
-
+from app.models import MALE,FEMALE
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 @staff_required
 def get_all_students(request):
@@ -79,7 +80,46 @@ def edit_student_profile(request,id):
 
 @staff_required
 def add_new_student(request):
-    return render(request, "staff/add-student.html")
+
+    if request.method == "POST":
+        try:
+            first_name = request.POST.get("first_name")
+            last_name = request.POST.get("last_name")
+            email = request.POST.get("email")
+            password = request.POST.get("password")
+            
+            user = User(username=email, email=email, first_name=first_name, last_name=last_name)
+            user.set_password(password)
+            user.save()
+
+            address = request.POST.get("address")
+            picture = request.FILES.get("picture")
+            phone = request.POST.get("phone")
+            department = request.POST.get("department")
+            faculty = request.POST.get("faculty")
+            year = request.POST.get("year")
+            gender = request.POST.get("gender")
+            print(department, faculty)
+            student = Student(address = address, user=user, image = picture, phone=phone, year = year)
+            student.department = Department.objects.get(id=department)
+            student.faculty = Faculty.objects.get(id=faculty)
+            student.gender = MALE if int(gender) == 0 else FEMALE
+            student.save()
+            messages.success(request, "student added successfully")
+            return redirect("staff:add-student")
+        except Exception as e:
+            print(str(e))
+            messages.warning(request, "student could not be added")
+            return redirect("staff:add-student")
+
+    faculties = Faculty.objects.all()
+    departments = Department.objects.all()
+    context = {
+    
+        "departments":departments,
+        "faculties":faculties
+    }
+    return render(request, "staff/add-student.html",context)
 
 def add_details(request):
     return render(request, "staff/add-details.html")

@@ -28,14 +28,14 @@
        <div class="card-body">
         <div class="d-flex justify-content-between">
          <div class="user">
-            {% if not request.user.staff_user %}
+            {% if request.user.student_user %}
           <div class="user-media">
-           <img alt="" class="avatar avatar-xxl" src={{student.image.url}}/>
+           <img alt="" class="avatar avatar-xxl" src={{request.user.student_user.image.url}}/>
           </div>
           <div>
            <h2 class="mb-0">
             
-            {{student.get_full_name}}
+            {{request.user.student_user.get_full_name}}
            </h2>
            <p class="text-primary font-w600">
             Student
@@ -57,7 +57,7 @@
              Mat No:
             </span>
             <h5 class="mb-0">
-             {{student.mat_no}}
+             {{request.user.student_user.mat_no}}
             </h5>
            </li>
           </ul>
@@ -74,7 +74,7 @@
              Address:
             </span>
             <h5 class="mb-0">
-             {{student.address}}
+             {{request.user.student_user.address}}
             </h5>
            </li>
           </ul>
@@ -91,7 +91,7 @@
              Phone:
             </span>
             <h5 class="mb-0">
-             {{student.phone}}
+             {{request.user.student_user.phone}}
             </h5>
            </li>
           </ul>
