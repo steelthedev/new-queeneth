@@ -99,7 +99,7 @@ def add_new_student(request):
             faculty = request.POST.get("faculty")
             year = request.POST.get("year")
             gender = request.POST.get("gender")
-            print(department, faculty)
+            print(picture)
             student = Student(address = address, user=user, image = picture, phone=phone, year = year)
             student.department = Department.objects.get(id=department)
             student.faculty = Faculty.objects.get(id=faculty)

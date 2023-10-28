@@ -84,7 +84,7 @@ class Ticket(models.Model):
     transaction_id = models.CharField(max_length=250)
     payment_mode = models.CharField(choices=PAYMENT,default=PAYSTACK,max_length=250)
     created_on = models.DateTimeField(auto_now_add=True)
-    completed_date = models.DateTimeField()
+    completed_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self) -> str:
         return self.student.get_full_name()

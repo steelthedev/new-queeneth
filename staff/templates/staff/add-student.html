@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="container-fluid">
-    <form action="{% url 'staff:add-student' %}" method="post">
+    <form action="{% url 'staff:add-student' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
     <div class="row">
      <div class="col-xl-12">
@@ -162,7 +162,7 @@
                <label class="form-label">
                 Set Password
                </label>
-               <input class="form-control" type="text" name="password" />
+               <input class="form-control" type="password" name="password" />
 
               </div>
           

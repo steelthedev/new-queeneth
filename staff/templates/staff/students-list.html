@@ -88,12 +88,14 @@
                 </td>
                 <td>
                  <div class="trans-list">
-                  <img alt="" class="avatar avatar-sm me-3" src={{student.image.url}}/>
+
+                  <img alt="" class="avatar avatar-sm me-3" src="{{student.image.url}}"/>
                   <h4>
                         <a href="{% url 'staff:get-student' student.id %}">   {{student.get_full_name}}</a>
                 
                   </h4>
                  </div>
+
                 </td>
                 <td>
                  <span class="text-primary font-w600">
