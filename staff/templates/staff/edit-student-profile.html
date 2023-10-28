@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- row -->
+    <div class="row">
+     <div class="col-xl-3 col-lg-4">
+      <div class="clearfix">
+       <div class="card card-bx profile-card author-profile m-b30">
+        <div class="card-body">
+         <div class="p-5">
+          <div class="author-profile">
+           <div class="autho-media">
+            <img alt="" width="100px" height="100px" class="rounded-circle" src="{{student.image.url}}"/>
+            <!-- <div class="upload-link" data-original-title="update" data-placement="right" data-toggle="tooltip" title="">
+             <input class="update-flie" type="file"/>
+             <i class="fa fa-camera">
+             </i>
+            </div> -->
+           </div>
+           <div class="author-info">
+            <h6 class="title">
+             {{student.get_full_name}}
+            </h6>
+            <span>
+             Student
+            </span>
+           </div>
+          </div>
+         </div>
+        
+       </div>
+      </div>
+     </div>
+     </div>
+     <div class="col-xl-9 col-lg-8">
+      <div class="card profile-card card-bx">
+       <div class="card-header">
+        <h6 class="title">
+         Student setup
+        </h6>
+       </div>
+       <form class="profile-form" method="post" action="{% url 'staff:edit-basic' student.id %}">
+        {% csrf_token %}
+        <div class="card-body">
+         <div class="row">
+          <div class="col-sm-6 m-b30">
+           <label class="form-label">
+            First Name
+           </label>
+           <input class="form-control" type="text" name="first_name" value={{student.user.first_name}} />
+          </div>
+          <div class="col-sm-6 m-b30">
+           <label class="form-label">
+            Last Name
+           </label>
+           <input class="form-control" name="last_name" type="text" value="{{student.user.last_name}}"/>
+          </div>
+          <div class="col-sm-6 m-b30">
+            <label class="form-label">
+             Department
+            </label>
+            <select class="selectpicker w-100" name="department">
+             <option selected value={{student.department.id}} >
+              {{student.department.title}}
+             </option>
+ 
+             {% for department in departments %}
+             <option value={{faculty.id}}>{{department.title}}</option>
+             {% endfor %}
+   
+            </select>
+           </div>
+        
+          <div class="col-sm-6 m-b30">
+           <label class="form-label">
+            Faculty
+           </label>
+           <select class="selectpicker w-100" name="faculty">
+            <option selected value={{student.faculty.id}} >
+             {{student.faculty.title}}
+            </option>
+
+            {% for faculty in faculties %}
+            <option selected value={{faculty.id}}>{{faculty.title}}</option>
+            {% endfor %}
+  
+           </select>
+          </div>
+       
+          
+
+         </div>
+         <button class="btn btn-primary mt-3" type="submit">
+          Update
+         </button>
+        </div>
+       
+       </form>
+       <div class="row">
+        <div class="col-xl-9 col-lg-8">
+          <div class="card profile-card card-bx">
+           <div class="card-header">
+            <h6 class="title">
+             Change Password
+            </h6>
+           </div>
+           <form method="post" action="{% url 'staff:edit-password' student.id %}" class="profile-form">
+            {% csrf_token %}
+            <div class="card-body">
+             <div class="row">
+              <div class="col-sm-6 m-b30">
+               <label class="form-label">
+                New Password
+               </label>
+               <input class="form-control" type="text" name="new_password" />
+
+               <button class="btn btn-primary mt-3" type="submit">
+                Update password
+               </button>
+              </div>
+          
+              
+             </div>
+            </div>
+          
+           
+           </form>
+           
+    
+          </div>
+         </div>
+      </div>
+      </div>
+
+     </div>
+
+     
+    </div>
+
+  
+
+{% endblock %}

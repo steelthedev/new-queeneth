@@ -133,6 +133,7 @@
        </a>
     
       </li>
+      {% if not request.user.staff_user %}
       <li>
        <a aria-expanded="false" href="{% url 'make-payments' %}">
         <i class="material-symbols-outlined">
@@ -155,18 +156,54 @@
      
        </li>
      
-      <li>
-        <a aria-expanded="false" href="{% url 'logout' %}">
+     
+    
+       {% elif request.user.staff_user %}
+
+       <li>
+        <a aria-expanded="false" href="{% url 'staff:all-students' %}">
          <i class="material-symbols-outlined">
           school
          </i>
          <span class="nav-text">
-          Logout
+          Student List
          </span>
         </a>
        </li>
-    
-     
+
+       <li>
+        <a aria-expanded="false" href="{% url 'staff:all-transactions' %}">
+         <i class="material-symbols-outlined">
+          school
+         </i>
+         <span class="nav-text">
+          All Transactions
+         </span>
+        </a>
+       </li>
+
+       <li>
+        <a aria-expanded="false" href="{% url 'staff:add-details' %}">
+         <i class="material-symbols-outlined">
+          school
+         </i>
+         <span class="nav-text">
+          Add options
+         </span>
+        </a>
+       </li>
+
+     {% endif %}
+     <li>
+      <a aria-expanded="false" href="{% url 'logout' %}">
+       <i class="material-symbols-outlined">
+        school
+       </i>
+       <span class="nav-text">
+        Logout
+       </span>
+      </a>
+     </li>
      </ul>
  
     </div>

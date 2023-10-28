@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block  content %}
+<div class="container-fluid">
+    <!-- row -->
+    <div class="row">
+
+
+     <div class="col-xl-6 col-lg-12">
+        <div class="card">
+         <div class="card-header">
+          <h4 class="card-title">
+           Add new Payment option
+          </h4>
+         </div>
+         <div class="card-body">
+          <div class="basic-form"> 
+            <form action="{% url 'staff:add-payment' %}" method="post">
+            {% csrf_token %}
+            <div class="row">
+             <div class="mb-3 col-md-6">
+              <label class="form-label">
+               Title
+              </label>
+              <input class="form-control" name="title" placeholder="e.g Acceptance Fee" type="text"/>
+             </div>
+             <div class="mb-3 col-md-6">
+              <label class="form-label">
+               Price
+              </label>
+              <input class="form-control" placeholder="20000" name="price" type="text"/>
+             </div>
+            </div>
+      
+            <button class="btn btn-primary" type="submit">
+             Submit
+            </button>
+           </form>
+          </div>
+         </div>
+        </div>
+       </div>
+
+     <div class="col-xl-6 col-lg-12">
+      <div class="card">
+       <div class="card-header">
+        <h4 class="card-title">
+         Add new Department
+        </h4>
+       </div>
+       <div class="card-body">
+        <div class="basic-form">
+         <form action="{% url 'staff:add-department' %}" method="post">
+            {% csrf_token %}
+          <div class="row">
+           <div class="mb-3 col-md-6">
+            <label class="form-label">
+             Department name
+            </label>
+            <input class="form-control"  placeholder="e.g Computer science" name="title" type="text"/>
+           </div>
+          </div>
+
+          <button class="btn btn-primary" type="submit">
+           Submit
+          </button>
+        
+         </form>
+        </div>
+       </div>
+      </div>
+     </div>
+
+
+     <div class="col-xl-6 col-lg-12">
+        <div class="card">
+         <div class="card-header">
+          <h4 class="card-title">
+           Add new Faculty
+          </h4>
+         </div>
+         <div class="card-body">
+          <div class="basic-form">
+            <form action="{% url 'staff:add-faculty' %}" method="post">
+                {% csrf_token %}
+            <div class="row">
+             <div class="mb-3 col-md-6">
+              <label class="form-label">
+               Faculty
+              </label>
+              <input class="form-control" name="title" placeholder="eg school of sciences" type="text"/>
+             </div>
+            </div>
+            
+     
+            <button class="btn btn-primary" type="submit">
+             Submit
+            </button>
+           </form>
+          </div>
+         </div>
+        </div>
+       </div>
+           
+     
+     </div>
+    </div>
+   
+
+
+{% endblock %}

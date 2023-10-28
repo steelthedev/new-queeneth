@@ -140,7 +140,7 @@ def payment_to_pdf(request,id):
 
     if not pdf.err:
         response = HttpResponse(result.getvalue(), content_type='application/pdf')
-        response['Content-Disposition'] = 'inline; filename="output.pdf"'
+        response['Content-Disposition'] = 'inline; filename="payment_slip_{}.pdf"'.format(id)
         return response
 
     return HttpResponse('Error generating PDF: %s' % pdf.err)

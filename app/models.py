@@ -43,9 +43,10 @@ class Student(models.Model):
     gender = models.CharField(choices=GENDER_CHOICES, max_length=200)
     address = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
-    department = models.CharField(max_length=200)
-    faculty = models.CharField(max_length=200)
+    department = models.ForeignKey("school.Department", on_delete=models.SET_NULL, null=True)
+    faculty = models.ForeignKey("school.Faculty", on_delete=models.SET_NULL, null=True)
     image = models.ImageField(null=True, blank=True)
+    created_on = models.DateTimeField(auto_now_add=True)
 
 
     def __str__(self) -> str:
