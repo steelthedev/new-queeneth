@@ -12,7 +12,8 @@ urlpatterns = [
     path('logout', views.LogoutView, name="logout"),
     path('transaction-detail/<int:id>', views.transaction_detail, name="transaction-detail"),
     path('payment-slip/<int:id>', views.payment_slip, name="payment-slip"),
-    path('print-payment/<int:id>', views.payment_to_pdf, name="print-payment")
+    path('print-payment/<int:id>', views.payment_to_pdf, name="print-payment"),
+    path('student/signup', views.signup_as_student, name="student-signup")
 
     
 ]

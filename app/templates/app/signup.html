@@ -1,0 +1,227 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html class="h-100" lang="en">
+ <!-- Mirrored from akademi.dexignlab.com/xhtml/page-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Jul 2023 19:15:57 GMT -->
+ <head>
+  <!-- All Meta -->
+  <meta charset="utf-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  
+  <!-- Mobile Specific -->
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <!-- Page Title Here -->
+  <title>
+ IMSP: Student Payment Portal | Login
+  </title>
+  <!-- FAVICONS ICON -->
+  <link href="{% static 'images/favicon.png' %}" rel="shortcut icon" type="image/png"/>
+  <link href="{% static 'vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %}" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet"/>
+  <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+ </head>
+ <body class="body h-100">
+
+<div class="container">
+    <div class="row">
+        <form action="{% url 'student-signup' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class="row">
+     <div class="col-xl-12">
+      <div class="card">
+       <div class="card-header">
+        <h5 class="mb-0">
+         Student Sign Up
+        </h5>
+       </div>
+       <div class="card-body">
+        <div class="row">
+       
+         <div class="col-xl-9 col-lg-8">
+          <div class="row">
+           <div class="">
+            <div class="mb-3">
+             <label class="form-label text-primary" for="exampleFormControlInput1">
+              First Name
+              <span class="required">
+               *
+              </span>
+             </label>
+             <input class="form-control" id="exampleFormControlInput1" placeholder="James" name="first_name" type="text"/>
+            </div>
+            <label class="form-label text-primary" for="exampleFormControlInput1">
+                Last Name
+                <span class="required">
+                 *
+                </span>
+               </label>
+               <input class="form-control" id="exampleFormControlInput1" placeholder="James" name="last_name" type="text"/>
+              </div>
+            <div class="mb-3">
+             <label class="form-label text-primary" for="exampleFormControlInput3">
+              Email
+              <span class="required">
+               *
+              </span>
+             </label>
+             <input class="form-control" id="exampleFormControlInput3" placeholder="hello@example.com" name="email" type="email"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-primary" for="exampleFormControlInput3">
+                 Phone number
+                 <span class="required">
+                  *
+                 </span>
+                </label>
+                <input class="form-control" id="exampleFormControlInput3" placeholder="0706473782892" name="phone" type="tel"/>
+               </div>
+
+               <div class="mb-3">
+                <label class="form-label text-primary" for="exampleFormControlInput3">
+                 Image
+                 <span class="required">
+                  *
+                 </span>
+                </label>
+                <input accept=".png, .jpg, .jpeg" name="picture" class="form-control" id="imageUpload" type="file"/>
+               </div>
+
+              
+            <div class="mb-3">
+             <label class="form-label text-primary" for="exampleFormControlTextarea1">
+              Address
+              <span class="required">
+               *
+              </span>
+             </label>
+             <textarea class="form-control" id="exampleFormControlTextarea1" name="address" rows="6">
+                                                    
+                                                 </textarea>
+            </div>
+            
+           </div>
+           <div class=" m-b30">
+            <label class="form-label text-primary">
+             Gender
+            </label>
+            <select class="selectpicker w-100" name="gender">
+         
+ 
+             
+             <option selected value="0">Male</option>
+             <option selected value="1">Female</option>
+             
+   
+            </select>
+           </div>
+           <div class="m-b30">
+            <label class="form-label text-primary">
+             Department
+            </label>
+            <select class="selectpicker w-100" name="department">
+        
+ 
+             {% for department in departments %}
+             <option value={{department.id}} >{{department.title}}</option>
+             {% endfor %}
+   
+            </select>
+           </div>
+        
+          <div class=" m-b30">
+           <label class="form-label text-primary">
+            Faculty
+           </label>
+           <select class="selectpicker w-100" name="faculty">
+          
+
+            {% for faculty in faculties %}
+            <option  value={{faculty.id}} >{{faculty.title}}</option>
+            {% endfor %}
+  
+           </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-primary" for="exampleFormControlInput3">
+             Year
+             <span class="required">
+              *
+             </span>
+            </label>
+            <input class="form-control" id="exampleFormControlInput3" name="year" placeholder="400,300,200" type="text"/>
+           </div>
+
+           <div class="mb-3">
+            <label class="form-label text-primary" for="exampleFormControlInput3">
+             Password
+             <span class="required">
+              *
+             </span>
+            </label>
+            <input class="form-control" id="exampleFormControlInput3" name="password" type="password"/>
+        
+            <button class="btn btn-primary mt-3" type="submit">
+                Submit
+                </button>
+        
+        </div>
+
+
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+  
+   
+    </form>
+    </div>
+    
+   </div>
+
+   <script src="{% static 'vendor/global/global.min.js' %}">
+</script>
+<script src="{% static 'vendor/chart.js/Chart.bundle.min.js' %}">
+</script>
+<script src="{% static 'vendor/bootstrap-select/dist/js/bootstrap-select.min.js' %}">
+</script>
+<!-- Apex Chart -->
+<script src="{% static 'vendor/apexchart/apexchart.js' %}">
+</script>
+<!-- Chart piety plugin files -->
+<script src="{% static 'vendor/peity/jquery.peity.min.js' %}">
+</script>
+<script src="{% static 'vendor/jquery-nice-select/js/jquery.nice-select.min.js' %}">
+</script>
+<!--swiper-slider-->
+<script src="{% static 'vendor/swiper/js/swiper-bundle.min.js' %}">
+</script>
+<!-- Datatable -->
+<script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js' %}">
+</script>
+<script src="{% static 'js/plugins-init/datatables.init.js' %}">
+</script>
+<!-- Dashboard 1 -->
+<script src="{% static 'js/dashboard/dashboard-1.js' %}">
+</script>
+<script src="{% static 'vendor/wow-master/dist/wow.min.js' %}">
+</script>
+<script src="{% static 'vendor/bootstrap-datetimepicker/js/moment.js' %}">
+</script>
+<script src="{% static 'vendor/datepicker/js/bootstrap-datepicker.min.js' %}">
+</script>
+<script src="{% static 'vendor/bootstrap-select-country/js/bootstrap-select-country.min.js' %}">
+</script>
+<script src="{% static 'js/dlabnav-init.js' %}">
+</script>
+<script src="{% static 'js/custom.min.js' %}">
+</script>
+<script src="{% static 'js/demo.js' %}">
+</script>
+<script src="{% static 'js/styleSwitcher.js' %}">
+</script>
+</body>
+<!-- Mirrored from akademi.dexignlab.com/xhtml/page-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Jul 2023 19:16:02 GMT -->
+</html>

@@ -10,6 +10,10 @@ from datetime import datetime
 from django.template import loader
 from xhtml2pdf import pisa
 import io
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
+from school.models import Department, Faculty
+from app.models import MALE, FEMALE
 
 
 def LoginView(request):
@@ -33,6 +37,43 @@ def LogoutView(request):
     if request.user.is_authenticated:
         logout(request)
         return redirect("login")
+
+def signup_as_student(request):
+
+    if request.method == "POST":
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        
+        user = User(username=email, email=email, first_name=first_name, last_name=last_name)
+        user.password = make_password(password)
+        user.save()
+
+        address = request.POST.get("address")
+        picture = request.FILES.get("picture")
+        phone = request.POST.get("phone")
+        department = request.POST.get("department")
+        faculty = request.POST.get("faculty")
+        year = request.POST.get("year")
+        gender = request.POST.get("gender")
+        student = Student(address = address, user=user, image = picture, phone=phone, year = year)
+        student.department = Department.objects.get(id=department)
+        student.faculty = Faculty.objects.get(id=faculty)
+        student.gender = MALE if int(gender) == 0 else FEMALE
+        student.save()
+        messages.success(request, "student account created successfully")
+        return redirect("login")
+    
+    faculties = Faculty.objects.all()
+    departments = Department.objects.all()
+    context = {
+    
+        "departments":departments,
+        "faculties":faculties
+    }
+    return render(request,"app/signup.html", context)
+    
 
 
 @login_required(login_url='login')

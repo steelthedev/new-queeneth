@@ -65,12 +65,14 @@
            </label>
            <input class="form-control" id="exampleFormControlInput2" type="password" name="password" placeholder="Password"/>
           </div>
-          <a class="text-primary float-end mb-4" href="javascript:void(0);">
-           Forgot Password ?
-          </a>
+        
           <button class="btn btn-block btn-primary" type="submit">
            Sign In
           </button>
+
+          <a href="{% url 'student-signup' %}" class="btn btn-block btn-primary mt-4" type="submit">
+            Create a new student account
+           </a>
          </form>
          <div class="new-account mt-3 text-center">
           </div>
