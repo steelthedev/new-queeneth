@@ -9655,7 +9655,7 @@ div, span, ol, ul {
   height: 5rem;
   width: var(--width);
   display: inline-block;
-  background-color: var(--nav-headbg);
+  background-color: #dc3545;
   text-align: left;
   position: absolute;
   top: 0;
@@ -9891,7 +9891,7 @@ div, span, ol, ul {
   z-index: 1;
   position: relative;
   padding: 0rem;
-  background: var(--headerbg);
+  background: #dc3545 !important;
   z-index: 3;
   padding-left: 17rem;
   transition: all .2s ease;
@@ -11017,7 +11017,7 @@ svg.pulse-svg {
   top: 5rem;
   padding-top: 0;
   z-index: 6;
-  background-color: var(--sidebar-bg);
+  background-color: #dc3545;
   border-top: none;
   transition: all .2s ease;
   box-shadow: 0rem 0.9375rem 1.875rem 0rem rgba(0, 0, 0, 0.02); }
